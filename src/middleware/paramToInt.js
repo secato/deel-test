@@ -5,7 +5,7 @@ const { BadRequest } = require('http-errors');
  * @param {string} paramName
  * @returns
  */
-const paramToInt = (paramName) => async (req, res, next) => {
+const paramToInt = (paramName) => (req, res, next) => {
   const parsedId = parseInt(req.params[paramName]);
 
   try {

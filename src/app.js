@@ -1,9 +1,10 @@
 const express = require('express');
 const { sequelize } = require('./model');
-const { getProfile, paramToInt, errorHandler } = require('./middleware');
+const { getProfile, paramToInt, errorHandler, queryToDate } = require('./middleware');
 const contractsController = require('./contracts/contract.controller');
 const jobsController = require('./jobs/jobs.controller');
 const balancesController = require('./balances/balances.controller');
+const adminController = require('./admin/admin.controller');
 
 const app = express();
 
@@ -21,6 +22,9 @@ app.post('/jobs/:job_id/pay', getProfile, paramToInt('job_id'), jobsController.p
 
 // TODO: I don't think we need this userId here
 app.post('/balances/deposit/:userId', getProfile, paramToInt('userId'), balancesController.deposit);
+
+// TODO: security for this endpoint
+app.get('/admin/best-profession', queryToDate('start', 'end'), adminController.findBestProfession);
 
 // Notice:
 // lack of pattern for path param, snake_case and camelCase

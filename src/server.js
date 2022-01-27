@@ -9,6 +9,7 @@ async function init() {
     });
   } catch (error) {
     console.error(`An error occurred: ${JSON.stringify(error)}`);
+    // TODO: close db connection
     process.exit(1);
   }
 }
