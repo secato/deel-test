@@ -12,4 +12,27 @@ async function getAllUnpaid(req, res, next) {
   }
 }
 
-module.exports = { getAllUnpaid };
+async function payJob(req, res, next) {
+  const { Contract, Job, Profile } = req.app.get('models');
+  const sequelize = req.app.get('sequelize');
+  const { job_id } = req.params;
+  const profile = req.profile;
+
+  //TODO: only clients can access this endpoint
+  try {
+    const payJob = await jobsService.payJob({
+      jobId: job_id,
+      profile,
+      Contract,
+      Job,
+      Profile,
+      sequelize,
+    });
+
+    res.json(payJob);
+  } catch (error) {
+    next(error);
+  }
+}
+
+module.exports = { getAllUnpaid, payJob };

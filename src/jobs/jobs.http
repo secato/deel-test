@@ -3,8 +3,8 @@
 
 ### get unpaid jobs
 GET {{baseUrl}}/unpaid HTTP/1.1
-profile_id : 1
+profile_id : {{profileId}}
 
-### get all non terminated contracts
-GET {{baseUrl}} HTTP/1.1
-profile_id : 6
+### pay job
+POST {{baseUrl}}/2/pay HTTP/1.1
+profile_id : {{profileId}}
