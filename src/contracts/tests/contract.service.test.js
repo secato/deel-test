@@ -1,16 +1,7 @@
 const contractService = require('../contract.service');
-
-const buildModelMock = () => {
-  return {
-    findOne: jest.fn(),
-    findAll: jest.fn(),
-  };
-};
+const { buildModelMock, FakeClient, FakeContractor } = require('../../utils/test-utils');
 
 const contractModelMock = buildModelMock();
-
-const FakeClient = (id, firstName, type = 'client') => ({ id, firstName, type });
-const FakeContractor = (id, firstName, type = 'contractor') => ({ id, firstName, type });
 
 describe('contracts', () => {
   describe('get contract by id', () => {

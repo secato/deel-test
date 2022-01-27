@@ -1,0 +1,10 @@
+@baseUrl=http://localhost:3001/jobs
+@profileId=1
+
+### get unpaid jobs
+GET {{baseUrl}}/unpaid HTTP/1.1
+profile_id : 1
+
+### get all non terminated contracts
+GET {{baseUrl}} HTTP/1.1
+profile_id : 6

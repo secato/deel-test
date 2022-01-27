@@ -2,7 +2,6 @@ const { Op } = require('sequelize');
 
 async function getById({ profile, Contract, id }) {
   const profileFilter = getFilterByProfileType(profile);
-
   const contract = await Contract.findOne({ where: { id, ...profileFilter } });
 
   return contract;
