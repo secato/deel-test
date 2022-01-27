@@ -18,7 +18,6 @@ async function payJob(req, res, next) {
   const { job_id } = req.params;
   const profile = req.profile;
 
-  //TODO: only clients can access this endpoint
   try {
     const payJob = await jobsService.payJob({
       jobId: job_id,
