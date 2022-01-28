@@ -6,6 +6,16 @@ const buildModelMock = () => {
   };
 };
 
+const buildSequelizeMock = () => ({
+  transaction: jest.fn(() => ({
+    rollback: jest.fn(),
+    commit: jest.fn(),
+  })),
+  col: jest.fn(),
+  fn: jest.fn(),
+  query: jest.fn(),
+});
+
 const FakeProfile = ({ id, firstName, type, balance }) => ({
   id,
   firstName,
@@ -20,4 +30,4 @@ const FakeClient = (id, firstName, balance) =>
 const FakeContractor = (id, firstName, balance) =>
   FakeProfile({ id, firstName, balance, type: 'contractor' });
 
-module.exports = { buildModelMock, FakeClient, FakeContractor };
+module.exports = { buildModelMock, buildSequelizeMock, FakeClient, FakeContractor };

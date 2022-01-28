@@ -1,16 +1,14 @@
 const jobsService = require('./jobs.service');
-const { buildModelMock, FakeClient, FakeContractor } = require('../utils/test-utils');
+const {
+  buildModelMock,
+  buildSequelizeMock,
+  FakeClient,
+  FakeContractor,
+} = require('../utils/test-utils');
 
 const contractModelMock = buildModelMock();
 const jobModelMock = buildModelMock();
 const profileModelMock = buildModelMock();
-
-const buildSequelizeMock = () => ({
-  transaction: jest.fn(() => ({
-    rollback: jest.fn(),
-    commit: jest.fn(),
-  })),
-});
 
 describe('jobs service', () => {
   beforeEach(() => {
