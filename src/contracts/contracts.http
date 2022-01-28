@@ -1,7 +1,7 @@
 @baseUrl=http://localhost:3001/contracts
 @profileId=1
 
-### get contract by id
+### get contract by id for client 1
 GET {{baseUrl}}/1 HTTP/1.1
 profile_id : {{profileId}}
 
@@ -9,6 +9,10 @@ profile_id : {{profileId}}
 GET {{baseUrl}}/3 HTTP/1.1
 profile_id : {{profileId}}
 
-### get all non terminated contracts
+### get all non terminated contracts for contractor with id 6
 GET {{baseUrl}} HTTP/1.1
 profile_id : 6
+
+### get all non terminated contracts for client with id 1
+GET {{baseUrl}} HTTP/1.1
+profile_id : {{profileId}}
