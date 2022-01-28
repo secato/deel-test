@@ -1,4 +1,4 @@
-const { Op } = require('sequelize');
+const { Op, QueryTypes } = require('sequelize');
 
 async function findBestProfession({ sequelize, startDate, endDate, Job, Contract, Profile }) {
   const bestProfessionResults = await Job.findAll({
@@ -33,4 +33,40 @@ async function findBestProfession({ sequelize, startDate, endDate, Job, Contract
   return bestProfessionResults;
 }
 
-module.exports = { findBestProfession };
+async function findBestClients({ limit, sequelize, startDate, endDate }) {
+  const bestClients = await sequelize.query(
+    `
+  SELECT
+    p.id,
+    p.firstName,
+    p.lastName,
+    SUM(j.price) as paid
+  FROM
+    Jobs j,
+    Contracts c ,
+    Profiles p
+  WHERE
+    j.paid = TRUE
+    AND j.paymentDate BETWEEN :startDate AND :endDate
+    AND j.ContractId = c.id
+    AND c.ClientId = p.id
+  GROUP BY
+    p.id 
+  ORDER BY
+    paid DESC
+  LIMIT :limit;
+  `,
+    {
+      type: QueryTypes.SELECT,
+      replacements: {
+        startDate,
+        endDate,
+        limit,
+      },
+    }
+  );
+
+  return bestClients;
+}
+
+module.exports = { findBestProfession, findBestClients };

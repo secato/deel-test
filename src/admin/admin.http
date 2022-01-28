@@ -1,8 +1,15 @@
 @baseUrl=http://localhost:3001/admin
 @profileId=2
 
-### deposit balance
+### best profession
 @start = 2020-01-01T00:00:00.000Z
 @end = 2020-08-15T23:59:00.000Z
 GET {{baseUrl}}/best-profession?start={{start}}&end={{end}} HTTP/1.1
+profile_id : {{profileId}}
+
+### best clients
+@start = 2020-01-01T00:00:00.000Z
+@end = 2020-12-31T00:00:00.000Z
+@limit = 3
+GET {{baseUrl}}/best-clients?start={{start}}&end={{end}}&limit={{limit}} HTTP/1.1
 profile_id : {{profileId}}

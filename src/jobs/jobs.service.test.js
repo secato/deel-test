@@ -1,5 +1,5 @@
-const jobsService = require('../jobs.service');
-const { buildModelMock, FakeClient, FakeContractor } = require('../../utils/test-utils');
+const jobsService = require('./jobs.service');
+const { buildModelMock, FakeClient, FakeContractor } = require('../utils/test-utils');
 
 const contractModelMock = buildModelMock();
 const jobModelMock = buildModelMock();

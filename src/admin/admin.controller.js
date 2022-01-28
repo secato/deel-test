@@ -21,4 +21,30 @@ async function findBestProfession(req, res, next) {
   }
 }
 
-module.exports = { findBestProfession };
+async function findBestClients(req, res, next) {
+  try {
+    const sequelize = req.app.get('sequelize');
+    const { start, end, limit = 2 } = req.query;
+
+    const bestClients = await adminService.findBestClients({
+      startDate: start,
+      endDate: end,
+      limit,
+      sequelize,
+    });
+
+    const bestClientsMapped = bestClients.map((client) => {
+      return {
+        id: client.id,
+        fullName: `${client.firstName} ${client.lastName}`,
+        paid: client.paid,
+      };
+    });
+
+    res.json(bestClientsMapped);
+  } catch (error) {
+    next(error);
+  }
+}
+
+module.exports = { findBestProfession, findBestClients };
