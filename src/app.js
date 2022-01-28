@@ -12,23 +12,23 @@ app.use(express.json());
 app.set('sequelize', sequelize);
 app.set('models', sequelize.models);
 
+// Contracts endpoints
 app.get('/contracts/:id', getProfile, paramToInt('id'), contractsController.getById);
 app.get('/contracts', getProfile, contractsController.getAll);
 
-// TODO: pagination?
+// Jobs endpoints
+// Thought: it would be good to add pagination here
 app.get('/jobs/unpaid', getProfile, jobsController.getAllUnpaid);
-//TODO: only clients can access this endpoint
 app.post('/jobs/:job_id/pay', getProfile, paramToInt('job_id'), jobsController.payJob);
 
-// TODO: I don't think we need this userId here
+// Balances endpoints
+// Thought: I don't think we need this userId here, the "logged" user would be enough
 app.post('/balances/deposit/:userId', getProfile, paramToInt('userId'), balancesController.deposit);
 
-// TODO: security for these endpoints ???
+// Admin endpoints
+// Thought: What would be the security for these endpoints since we don't have admin profile
 app.get('/admin/best-profession', queryToDate('start', 'end'), adminController.findBestProfession);
 app.get('/admin/best-clients', queryToDate('start', 'end'), adminController.findBestClients);
-
-// Notice:
-// lack of pattern for path param, snake_case and camelCase
 
 app.use(errorHandler);
 

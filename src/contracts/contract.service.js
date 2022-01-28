@@ -1,4 +1,5 @@
 const { Op } = require('sequelize');
+const { getFilterByProfileType } = require('../utils/database');
 
 async function getById({ profile, Contract, id }) {
   const profileFilter = getFilterByProfileType(profile);
@@ -15,10 +16,6 @@ async function getAllNotTerminated({ profile, Contract }) {
   });
 
   return contracts;
-}
-
-function getFilterByProfileType(profile) {
-  return profile.type === 'client' ? { ClientId: profile.id } : { ContractorId: profile.id };
 }
 
 module.exports = { getById, getAllNotTerminated };

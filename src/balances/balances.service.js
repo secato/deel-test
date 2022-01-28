@@ -6,10 +6,8 @@ async function depositBalance({ profile, amount, sequelize, Contract, Job, Profi
 
   const transaction = await sequelize.transaction();
   try {
-    // start transaction
-    // get profile
     const client = await Profile.findByPk(profile.id, { transaction });
-    // get all unpaid jobs for open contracts
+
     const toPay = await Job.sum(
       'price',
       {
@@ -25,8 +23,7 @@ async function depositBalance({ profile, amount, sequelize, Contract, Job, Profi
       { transaction }
     );
 
-    //   TODO: check this
-    if (canDeposit(client, amount, toPay)) {
+    if (cannotDeposit(client, amount, toPay)) {
       throw new BadRequest('You exceeded the amount that you can deposit');
     }
 
@@ -43,6 +40,6 @@ async function depositBalance({ profile, amount, sequelize, Contract, Job, Profi
 }
 
 const depositLimit = (toPay) => (toPay / 100) * 25;
-const canDeposit = (client, amount, toPay) => client.balance + amount > depositLimit(toPay);
+const cannotDeposit = (client, amount, toPay) => client.balance + amount > depositLimit(toPay);
 
 module.exports = { depositBalance };

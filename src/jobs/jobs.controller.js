@@ -1,3 +1,4 @@
+const { Forbidden } = require('http-errors');
 const jobsService = require('./jobs.service');
 
 async function getAllUnpaid(req, res, next) {
@@ -17,6 +18,8 @@ async function payJob(req, res, next) {
   const sequelize = req.app.get('sequelize');
   const { job_id } = req.params;
   const profile = req.profile;
+
+  if (!req.profile.isClient()) throw new Forbidden();
 
   try {
     const payJob = await jobsService.payJob({

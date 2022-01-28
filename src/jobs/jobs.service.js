@@ -1,5 +1,6 @@
 const { Forbidden, NotFound, BadRequest } = require('http-errors');
 const { Op } = require('sequelize');
+const { getFilterByProfileType } = require('../utils/database');
 
 async function getAllUnpaidJobs({ profile, Contract, Job }) {
   const profileFilter = getFilterByProfileType(profile);
@@ -72,11 +73,6 @@ async function payJob({ profile, jobId, Contract, Job, Profile, sequelize }) {
 
 function clientCanPay(client, job) {
   return client.balance >= job.price;
-}
-
-// TODO: duplicate
-function getFilterByProfileType(profile) {
-  return profile.type === 'client' ? { ClientId: profile.id } : { ContractorId: profile.id };
 }
 
 module.exports = { getAllUnpaidJobs, payJob };

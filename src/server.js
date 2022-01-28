@@ -9,7 +9,11 @@ async function init() {
     });
   } catch (error) {
     console.error(`An error occurred: ${JSON.stringify(error)}`);
-    // TODO: close db connection
+
+    // make sure to close the database connection
+    const sequelize = app.get('sequelize');
+    await sequelize.close();
+
     process.exit(1);
   }
 }
