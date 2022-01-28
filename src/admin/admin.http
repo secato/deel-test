@@ -1,15 +1,20 @@
 @baseUrl=http://localhost:3001/admin
-@profileId=2
 
 ### best profession
 @start = 2020-01-01T00:00:00.000Z
 @end = 2020-08-15T23:59:00.000Z
 GET {{baseUrl}}/best-profession?start={{start}}&end={{end}} HTTP/1.1
-profile_id : {{profileId}}
 
-### best clients
-@start = 2020-01-01T00:00:00.000Z
-@end = 2020-12-31T00:00:00.000Z
+### best profession (no results for 2021)
+@start2 = 2021-01-01T00:00:00.000Z
+@end2  = 2021-12-31T00:00:00.000Z
+GET {{baseUrl}}/best-profession?start={{start2}}&end={{end2}} HTTP/1.1
+
+### best clients limit 3
+@start3 = 2020-01-01T00:00:00.000Z
+@end3 = 2020-12-31T00:00:00.000Z
 @limit = 3
-GET {{baseUrl}}/best-clients?start={{start}}&end={{end}}&limit={{limit}} HTTP/1.1
-profile_id : {{profileId}}
+GET {{baseUrl}}/best-clients?start={{start3}}&end={{end3}}&limit={{limit}} HTTP/1.1
+
+### best clients no limit (default to 2)
+GET {{baseUrl}}/best-clients?start={{start3}}&end={{end3}} HTTP/1.1

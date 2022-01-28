@@ -56,7 +56,11 @@ async function payJob({ profile, jobId, Contract, Job, Profile, sequelize }) {
       job.Contract.status = 'in_progress';
     }
 
-    // TODO: if last payment, then update contract status to terminated
+    // Thought: if last payment, then update contract status to terminated
+    // That would be automatic or a manual process later?
+    // In the UI we could display the number of jobs done and total
+    // like 9/10 jobs done and once it reaches 10/10 we could have a "terminate" action
+    // where the client can leave a comment
 
     await job.save({ transaction });
     await job.Contract.save({ transaction });

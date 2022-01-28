@@ -26,7 +26,7 @@ app.post('/jobs/:job_id/pay', getProfile, paramToInt('job_id'), jobsController.p
 app.post('/balances/deposit/:userId', getProfile, paramToInt('userId'), balancesController.deposit);
 
 // Admin endpoints
-// Thought: What would be the security for these endpoints since we don't have admin profile
+// Thought: What would be the security for these endpoints since we don't have a admin profile
 app.get('/admin/best-profession', queryToDate('start', 'end'), adminController.findBestProfession);
 app.get('/admin/best-clients', queryToDate('start', 'end'), adminController.findBestClients);
 
