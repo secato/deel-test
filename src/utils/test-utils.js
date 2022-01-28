@@ -3,6 +3,7 @@ const buildModelMock = () => {
     findOne: jest.fn(),
     findAll: jest.fn(),
     findByPk: jest.fn(),
+    sum: jest.fn(),
   };
 };
 
