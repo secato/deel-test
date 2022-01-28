@@ -2,6 +2,13 @@
   "name": "deel-task",
   "version": "0.1.0",
   "private": true,
+  "scripts": {
+    "start": "nodemon ./src/server.js",
+    "seed": "node ./scripts/seedDb.js",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:e2e": "jest --config tests/jest.config.js"
+  },
   "dependencies": {
     "body-parser": "^1.19.0",
     "express": "4.17.1",
@@ -9,16 +16,11 @@
     "sequelize": "^6.3.4",
     "sqlite3": "^4.0.1"
   },
-  "scripts": {
-    "start": "nodemon ./src/server.js",
-    "seed": "node ./scripts/seedDb.js",
-    "test": "jest",
-    "test:watch": "jest --watch"
-  },
   "devDependencies": {
     "concurrently": "4.1.0",
     "jest": "^27.4.7",
-    "nodemon": "1.19.1"
+    "nodemon": "1.19.1",
+    "supertest": "^6.2.2"
   },
   "engines": {
     "node": ">=10.16.3"
